@@ -9,17 +9,17 @@ app.get('/',(req,res) =>{
 
 app.get('/customer',(req,res) =>{
     console.log('get request comming!');
-    res.send('<h1>customer get request came <h1/>')
+    res.send('<h1>Customer get request came !<h1/>')
 });
 
 app.get('/item',(req,res) =>{
     console.log('get request comming!');
-    res.send('<h1>item get request came <h1/>')
+    res.send('<h1>Item get request came !<h1/>')
 });
 
 app.get('/order',(req,res) =>{
     console.log('get request comming!');
-    res.send('<h1>order get request came <h1/>')
+    res.send('<h1>Order get request came !<h1/>')
 });
 
 app.listen(port, () =>{

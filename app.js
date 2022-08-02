@@ -12,6 +12,11 @@ app.get('/customer',(req,res) =>{
     res.send('<h1>customer get request came <h1/>')
 });
 
+app.get('/item',(req,res) =>{
+    console.log('get request comming!');
+    res.send('<h1>item get request came <h1/>')
+});
+
 app.listen(port, () =>{
     console.log(`app listening on port ${port}`);
 });

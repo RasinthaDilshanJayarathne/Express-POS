@@ -20,6 +20,10 @@ app.post('/customer',(req,res) =>{
     res.send('<h2>post request came for /customer <h2/>')
 });
 
+app.delete('/customer',(req,res) =>{
+    res.send('<h2>delete request came for /customer <h2/>')
+});
+
 app.get('/item',(req,res) =>{
     console.log('get request comming!');
     res.send('<h1>Item get request came !<h1/>')

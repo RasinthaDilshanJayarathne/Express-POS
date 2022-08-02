@@ -25,9 +25,17 @@ app.get('/item',(req,res) =>{
     res.send('<h1>Item get request came !<h1/>')
 });
 
+app.post('/item',(req,res) =>{
+    res.send('<h2>post request came for /item <h2/>')
+});
+
 app.get('/order',(req,res) =>{
     console.log('get request comming!');
     res.send('<h1>Order get request came !<h1/>')
+});
+
+app.post('/order',(req,res) =>{
+    res.send('<h2>post request came for /order <h2/>')
 });
 
 app.listen(port, () =>{

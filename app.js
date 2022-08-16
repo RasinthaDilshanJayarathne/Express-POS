@@ -10,7 +10,7 @@ app.use('/item',  item)
 
 app.get('/', (req, res) => {
     console.log('get request comming!');
-    res.send('get req came for / route')
+    res.send('get req came for / route....')
 })
 
 // app.post('/', (req, res) => {

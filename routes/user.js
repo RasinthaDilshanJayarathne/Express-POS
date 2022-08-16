@@ -1,4 +1,17 @@
 const express = require('express')
+const mysql = require('mysql')
+const db = require('../configs/db.config')
+
+const connection = mysql.createConnection(db.database)
+
+connection.connect(function(err){
+    if(err){
+        console.log(err);
+    }else{
+        console.log('Connected to the MYSQL server');
+    }
+})
+
 const router = express.Router()
 
 router.get('/',(req, res) =>{
@@ -7,7 +20,7 @@ router.get('/',(req, res) =>{
 
 router.post('/',(req, res) =>{
     console.log(req.body);
-    
+
     res.send('user post method')
 })
 

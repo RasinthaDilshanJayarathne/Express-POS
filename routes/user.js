@@ -9,6 +9,14 @@ connection.connect(function(err){
         console.log(err);
     }else{
         console.log('Connected to the MYSQL server');
+        var userTableQuery = "CREATE TABLE IF NOT EXISTS users (id VARCHAR(255) PRIMARY KEY, name VARCHAR(255), username Varchar(255))"
+        connection.query(userTableQuery, function(err,result){
+            if(err) throw err;
+            console.log(result);
+            if(result.warningCount === 0){
+                console.log('User table created');
+            }
+        })
     }
 })
 
@@ -18,10 +26,21 @@ router.get('/',(req, res) =>{
     res.send('user get')
 })
 
-router.post('/',(req, res) =>{
-    console.log(req.body);
 
-    res.send('user post method')
+router.post('/',(req, res) =>{
+    const id = req.body.id
+    const name = req.body.name
+    const username = req.body.username
+   
+    var query = "INSERT INTO users (id, name, username) VALUES (?,?,?)"
+
+    connection.query(query, [id, name, username], (err) =>{
+        if(err){
+            res.send({"message" : "duplicate entry"})
+        }else{
+            res.send({"message" : "user created!"})
+        }
+    })
 })
 
 router.put('/',(req, res) =>{

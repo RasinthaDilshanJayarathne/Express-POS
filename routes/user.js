@@ -69,13 +69,32 @@ router.put('/',(req, res) =>{
 })
 
 router.delete('/:id', (req, res) => {
-    console.log(req.params.id);
-    res.send('delete user-id request came')
+    const id = req.params.id
+
+    var query = "DELETE FROM users WHERE id=?";
+
+    connection.query(query, [id], (err, rows) => {
+        if (err) console.log(err);
+
+        if (rows.affectedRows > 0) {
+            res.send({ 'message': 'user deleted' })
+        } else {
+            res.send({ 'message': 'user not found' })
+        }
+    })
 })
 
 //get user by id
 router.get('/:id', (req, res) => {
-    res.send('get user-id request came')
+    const id = req.params.id
+
+    var query = "SELECT * FROM users WHERE id=?"
+
+    connection.query(query, [id], (err, rows) => {
+        if (err) console.log(err);
+
+        res.send(rows)
+    })
 })
 
 module.exports = router;

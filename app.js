@@ -1,17 +1,19 @@
 const express = require('express')
 const customer = require('./routes/customer')
 const item = require('./routes/item')
+const user = require ('./routes/user')
 const app = express()
 const port = 4000
 
 app.use(express.json())
 app.use('/customer', customer)
 app.use('/item',  item)
+app.use('/users',user)
 
-app.get('/', (req, res) => {
-    console.log('get request comming!');
-    res.send('get req came for / route....')
-})
+// app.get('/', (req, res) => {
+//     console.log('get request comming!');
+//     res.send('get req came for / route....')
+// })
 
 // app.post('/', (req, res) => {
 //     res.send('<h2>post request came for / route</h2>')
@@ -39,6 +41,8 @@ app.get('/', (req, res) => {
 // app.post('/cart', (req, res) => {
 //     res.send('cart')
 // })
+
+
 
 app.listen(port, () => {
     console.log(`app starting on ${port}`);

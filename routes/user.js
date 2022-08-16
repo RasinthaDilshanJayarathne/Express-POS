@@ -50,7 +50,21 @@ router.post('/',(req, res) =>{
 })
 
 router.put('/',(req, res) =>{
-    res.send('user put method')
+    const id = req.body.id
+    const name = req.body.name
+    const username = req.body.username
+   
+    var query = "UPDATE users SET name =?, username=? WHERE id=?"
+
+    connection.query(query, [name, username, id], (err,rows) =>{
+        if(err) throw err
+        
+        if(rows.affectedRows > 0){
+            res.send({'message' : 'User Updated'})
+        }else{
+            res.send({'message' : 'User not found'})
+        }
+    })
 })
 
 router.delete('/:id', (req, res) => {

@@ -57,13 +57,14 @@ router.put('/',(req, res) =>{
     var query = "UPDATE users SET name =?, username=? WHERE id=?"
 
     connection.query(query, [name, username, id], (err,rows) =>{
-        if(err) throw err
+        if(err) console.log(err);
         
         if(rows.affectedRows > 0){
             res.send({'message' : 'User Updated'})
         }else{
             res.send({'message' : 'User not found'})
         }
+
     })
 })
 

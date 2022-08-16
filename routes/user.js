@@ -22,8 +22,14 @@ connection.connect(function(err){
 
 const router = express.Router()
 
-router.get('/',(req, res) =>{
-    res.send('user get')
+router.get('/',(req, res) =>{   
+    var query = "SELECT * FROM users"
+
+    connection.query(query,(err,rows) =>{
+        if(err) throw err
+
+        res.send(rows)
+    })
 })
 
 

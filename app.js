@@ -7,7 +7,7 @@ const port = 4000
 
 app.use(express.json())
 app.use('/customer', customer)
-app.use('/item',  item)
+app.use('/items',  item)
 app.use('/users',user)
 
 // app.get('/', (req, res) => {

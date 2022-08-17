@@ -32,7 +32,6 @@ router.get('/',(req, res) =>{
     })
 })
 
-
 router.post('/',(req, res) =>{
     const id = req.body.id
     const name = req.body.name

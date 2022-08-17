@@ -45,7 +45,7 @@ router.post('/',(req, res) =>{
         if(err){
             res.send({"message" : "duplicate entry"})
         }else{
-            res.send({"message" : "item succesfully added!"})
+            res.send({"message" : "Item succesfully added!"})
         }
     })
 })

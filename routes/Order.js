@@ -88,7 +88,7 @@ router.get('/:orderId', (req, res) => {
 
     var query = "SELECT * FROM orders WHERE orderId=?"
 
-    connection.query(query, [id], (err, rows) => {
+    connection.query(query, [orderId], (err, rows) => {
         if (err) console.log(err);
 
         res.send(rows)

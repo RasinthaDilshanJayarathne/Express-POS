@@ -86,7 +86,7 @@ router.delete('/:orderId', (req, res) => {
 router.get('/:orderId', (req, res) => {
     const orderId = req.params.orderId
 
-    var query = "SELECT * FROM order WHERE orderId=?"
+    var query = "SELECT * FROM orders WHERE orderId=?"
 
     connection.query(query, [id], (err, rows) => {
         if (err) console.log(err);

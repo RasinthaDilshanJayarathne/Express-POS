@@ -39,7 +39,7 @@ router.post('/',(req, res) =>{
      
     var query = "INSERT INTO orders (orderId, date, customerId) VALUES (?,?,?)"
 
-    connection.query(query, [id, date, customerId], (err) =>{
+    connection.query(query, [orderId, date, customerId], (err) =>{
         if(err){
             res.send({"message" : "duplicate entry"})
         }else{

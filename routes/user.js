@@ -12,7 +12,7 @@ connection.connect(function(err){
         var userTableQuery = "CREATE TABLE IF NOT EXISTS users (id VARCHAR(255) PRIMARY KEY, name VARCHAR(255), username Varchar(255))"
         connection.query(userTableQuery, function(err,result){
             if(err) throw err;
-            console.log(result);
+            // console.log(result);
             if(result.warningCount === 0){
                 console.log('User table created');
             }

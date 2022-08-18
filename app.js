@@ -1,8 +1,11 @@
 const express = require('express')
+const mongoose = require('mongoose')
+
 const customer = require('./routes/customer')
 const item = require('./routes/item')
 const user = require ('./routes/user')
-const user = require ('./routes/Order')
+const order = require ('./routes/Order')
+
 const app = express()
 const port = 4000
 
@@ -12,38 +15,14 @@ app.use('/items',  item)
 app.use('/users',user)
 app.use('/orders',order)
 
-// app.get('/', (req, res) => {
-//     console.log('get request comming!');
-//     res.send('get req came for / route....')
-// })
+//const url = 'mongodb://127.0.0.1/express'
 
-// app.post('/', (req, res) => {
-//     res.send('<h2>post request came for / route</h2>')
-// })
+// mongoose.connect(url, { useNewUrlParser: true })
+// const con = mongoose.connection
 
-// app.get('/customer', (req, res) => {
-//     console.log('customer get come');
-//     res.send('<h1>Customer get request came</h1>')
+// con.on("open", () => {
+//     console.log('MongoDB connected!');
 // })
-
-// app.post('/customer', (req, res) => {
-//     console.log(req.body.id);
-//     res.send('customer post req came')
-// })
-
-// app.delete('/customer', (req, res) => {
-//     console.log(req.query.id);
-//     res.send('delete req came for customer')
-// })
-
-// app.get('/cart', (req, res) => {
-//     res.send('cart get request')
-// })
-
-// app.post('/cart', (req, res) => {
-//     res.send('cart')
-// })
-
 
 
 app.listen(port, () => {

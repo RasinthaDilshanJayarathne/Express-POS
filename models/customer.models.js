@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const itemSchema = new mongoose.Schema({
-    code:{
+const customerSchema = new mongoose.Schema({
+    customerId:{
         type:String,
         required:true
     },
@@ -9,18 +9,14 @@ const itemSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    discription:{
+    address:{
         type:String,
         required:true
     },
-    price:{
-        type:Number,
-        required:true
-    },
-    qtyOnHand:{
+    salary:{
         type:Number,
         required:true
     }
 })
 
-module.exports = mongoose.model('item',itemSchema)
+module.exports = mongoose.model('customer',customerSchema)

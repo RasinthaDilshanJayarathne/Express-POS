@@ -1,100 +1,68 @@
-// const express = require('express')
-// const mysql = require('mysql')
-// const db = require('../configs/db.config')
+const express = require('express')
+const app = express()
+const router = express.Router()
 
-// const connection = mysql.createConnection(db.database)
+const Customer = require('../models/customer.models')
 
-// connection.connect(function(err){
-//     if(err){
-//         console.log(err);
-//     }else{
-//         console.log('Connected to the MYSQL server');
-//         var userTableQuery = "CREATE TABLE IF NOT EXISTS customer (id VARCHAR(255) PRIMARY KEY, name VARCHAR(255), address Varchar(255), salary double)"
-//         connection.query(userTableQuery, function(err,result){
-//             if(err) throw err;
-//             console.log(result);
-//             if(result.warningCount === 0){
-//                 console.log('Customer table created');
-//             }
-//         })
-//     }
-// })
+app.use(express.json())
 
-// const router = express.Router()
+router.get('/', async (req, res) => {
+    try {
+        const customers = await Customer.find()
+        res.json(customers)
+    } catch (err) {
+        res.send('Err' + err)
+    }
+})
 
-// router.get('/',(req, res) =>{   
-//     var query = "SELECT * FROM customer"
+router.post('/', async (req, res) => {
+    const customers = new Customer({
+        customerId: req.body.customerId,
+        name: req.body.name,
+        address: req.body.address,
+        salary: req.body.salary,
+    })
+    try {
+        const response = await customers.save()
+        res.json(response)
+        //res.send(response)
+    } catch (err) {
+        res.send('Err' + err)
+    }
+})
 
-//     connection.query(query,(err,rows) =>{
-//         if(err) throw err
+router.get('/:id', async (req, res) => {
+    try {
+        const customer = await Customer.findById(req.params.id)
+        res.json(customer)
+    } catch (err) {
+        res.send(err)
+    }
+})
 
-//         res.send(rows)
-//     })
-// })
+router.delete('/:id', async (req, res) => {
+    try {
+        const customer = await Customer.findById(req.params.id)
+        const response = await customer.remove()
+        res.json(response)
+    } catch (err) {
+        res.send(err)
+    }
+})
 
-// router.post('/',(req, res) =>{
-//     const id = req.body.id
-//     const name = req.body.name
-//     const address = req.body.address
-//     const salary = req.body.salary
-     
-//     var query = "INSERT INTO customer (id, name, address, salary) VALUES (?,?,?,?)"
+router.put('/:id', async (req, res) => {
+    try {
+        const customer = await Customer.findById(req.params.id)
+            customer.customerId = req.body.customerId,
+            customer.name = req.body.name,
+            customer.address = req.body.address,
+            customer.salary = req.body.salary
 
-//     connection.query(query, [id, name, address, salary], (err) =>{
-//         if(err){
-//             res.send({"message" : "duplicate entry"})
-//         }else{
-//             res.send({"message" : "Customer succesfully added!"})
-//         }
-//     })
-// })
+        const response = await customer.save()
+        res.json(response)
+    } catch (err) {
+        res.send(err)
+    }
+})
 
-// router.put('/',(req, res) =>{
-//     const id = req.body.id
-//     const name = req.body.name
-//     const address = req.body.address
-//     const salary = req.body.salary
-
-//     var query = "UPDATE customer SET name=?, address=?, salary=? WHERE id=?"
-
-//     connection.query(query, [name, address, salary, id], (err,rows) =>{
-//         if(err) console.log(err);
-        
-//         if(rows.affectedRows > 0){
-//             res.send({'message' : 'Customer Updated'})
-//         }else{
-//             res.send({'message' : 'Customer not found'})
-//         }
-//     })
-// })
-
-// router.delete('/:id', (req, res) => {
-//     const id = req.params.id
-
-//     var query = "DELETE FROM customer WHERE id=?";
-
-//     connection.query(query, [id], (err, rows) => {
-//         if (err) console.log(err);
-
-//         if (rows.affectedRows > 0) {
-//             res.send({ 'message': 'Customer deleted' })
-//         } else {
-//             res.send({ 'message': 'Customer not found' })
-//         }
-//     })
-// })
-
-// //get customer by id
-// router.get('/:id', (req, res) => {
-//     const id = req.params.id
-
-//     var query = "SELECT * FROM customer WHERE id=?"
-
-//     connection.query(query, [id], (err, rows) => {
-//         if (err) console.log(err);
-
-//         res.send(rows)
-//     })
-// })
-
-// module.exports = router
+module.exports = router

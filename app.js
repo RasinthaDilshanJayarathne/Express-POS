@@ -12,7 +12,7 @@ const port = 4000
 
 app.use(express.json())
 
-//app.use('/customer', customer)
+app.use('/customer', customer)
 app.use('/items',  item)
 // app.use('/users',user)
 // app.use('/orders',order)

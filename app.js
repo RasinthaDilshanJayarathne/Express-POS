@@ -11,22 +11,21 @@ const app = express()
 const port = 4000
 
 app.use(express.json())
-app.use('/customer', customer)
+
+//app.use('/customer', customer)
 app.use('/items',  item)
-app.use('/users',user)
-app.use('/orders',order)
-app.use('/orderDetail',orderDetail)
+// app.use('/users',user)
+// app.use('/orders',order)
+// app.use('/orderDetail',orderDetail)
 
+const url = 'mongodb://127.0.0.1/express_one'
 
-//const url = 'mongodb://127.0.0.1/express'
+mongoose.connect(url, { useNewUrlParser: true })
+const con = mongoose.connection
 
-// mongoose.connect(url, { useNewUrlParser: true })
-// const con = mongoose.connection
-
-// con.on("open", () => {
-//     console.log('MongoDB connected!');
-// })
-
+con.on("open", () => {
+    console.log('MongoDB connected!');
+})
 
 app.listen(port, () => {
     console.log(`app starting on ${port}`);
